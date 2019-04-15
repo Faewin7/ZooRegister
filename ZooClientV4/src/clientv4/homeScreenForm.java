@@ -38,6 +38,7 @@ public class homeScreenForm extends javax.swing.JFrame {
     
     public homeScreenForm() {
         initComponents();
+        connection.connectTheServer();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
@@ -345,8 +346,7 @@ public class homeScreenForm extends javax.swing.JFrame {
      *corresponding method from CliConn. 
      */
     private void btnSrcSpeciesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSrcSpeciesActionPerformed
-        cliConn searchSpecies = new cliConn();
-        searchSpecies.connectTheServer();
+        connection.connectTheServer();
         String speciesKeyword = txtfKeyword.getText();
         
         if (speciesKeyword.equals("")) {
@@ -354,7 +354,7 @@ public class homeScreenForm extends javax.swing.JFrame {
         } else {
             boolean matches = Pattern.matches("^[a-zA-Z]+\\s*[a-zA-Z]$", speciesKeyword);
             if (matches) {
-                String[][] speciesData = searchSpecies.searchSpecies(speciesKeyword);
+                String[][] speciesData = connection.searchSpecies(speciesKeyword);
                 String columnNames[] = {"Species ID", "Species Name"};
                 tblAnimals = new JTable(speciesData, columnNames);
             }
@@ -367,8 +367,7 @@ public class homeScreenForm extends javax.swing.JFrame {
      *corresponding method from CliConn. 
      */
     private void btnSrcAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSrcAnimalActionPerformed
-        cliConn searchAnimal = new cliConn();
-        searchAnimal.connectTheServer();
+        connection.connectTheServer();
         String animalKeyword = txtfKeyword.getText();
         animal[] animals;
         
@@ -377,7 +376,7 @@ public class homeScreenForm extends javax.swing.JFrame {
         } else {
             boolean matches = Pattern.matches("^[a-zA-Z]+\\s*[a-zA-Z]$", animalKeyword);
             if(matches) {
-                animals = searchAnimal.searchAnimals(animalKeyword);
+                animals = connection.searchAnimals(animalKeyword);
                 String columnTitles[] = {"ID", "Name", "Description", "Species ID"}; 
                 Object[][] tableData = new Object[animals.length][4];
                 for(int j = 1; j < animals.length; j++) {

@@ -515,7 +515,7 @@ public class adminScreen extends javax.swing.JFrame {
         if(species.equals("")) {
             JOptionPane.showMessageDialog(null, "Please enter the name of the species you wish to delete");
         } else {
-            boolean matches = Pattern.matches("[^0-9][a-zA-Z]+\\s*[^0-9][a-zA-Z]$", species);
+            boolean matches = Pattern.matches("[A-Z][a-z]+\\s[A-Z][a-z]+\\s*", species);
             if (matches) {
                 result = deleteSpecies.deleteSpecies(species);
                 if (result.equals("true")) {
@@ -547,7 +547,7 @@ public class adminScreen extends javax.swing.JFrame {
         if(animalName.equals("") || animalDesc.equals("") || speciesID.equals("")) {
             JOptionPane.showMessageDialog(null, "Please ensure all fields contain information regarding the animal you wish to add to the database.");
         } else {
-            boolean matchesName = Pattern.matches("[^0-9][a-zA-Z]+\\s*[^0-9][a-zA-Z]$", animalName);
+            boolean matchesName = Pattern.matches("[A-Z][a-z]+\\s*", animalName);
             boolean matchesDesc = Pattern.matches("[^0-9][a-zA-Z]+\\s*[^0-9][a-zA-Z]$", animalDesc);
             boolean matchesSpecID = Pattern.matches("[0-9].{1,3}", speciesID);
             if (matchesName && matchesDesc && matchesSpecID) {
@@ -579,7 +579,7 @@ public class adminScreen extends javax.swing.JFrame {
         if(speciesName.equals("")) {
             JOptionPane.showMessageDialog(null, "Please enter the name of the species you wish to delete.");
         } else {
-            boolean matchesSpec = Pattern.matches("[^0-9][a-zA-Z]+\\s*[^0-9][a-zA-Z]$", speciesName);
+            boolean matchesSpec = Pattern.matches("[A-Z][a-z]+\\s[A-Z][a-z]+\\s*", speciesName);
             if (matchesSpec) {
                 result = addSpecies.addSpecies(speciesName);
                 if (result.equals(true)) {

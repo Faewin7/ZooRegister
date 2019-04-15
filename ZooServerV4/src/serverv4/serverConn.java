@@ -39,11 +39,11 @@ public class serverConn {
                     clientHandler incomingClient = new clientHandler(s);
                     incomingClient.start();
                 } catch (IOException se) {
-                    JOptionPane.showMessageDialog(null, "Error occured establishing connection from client.");
+                    
                 }
             }
         } catch (IOException sse) {
-            JOptionPane.showMessageDialog(null, "Error occured creating the Server Socket");
+            
         }
     }
     
@@ -73,7 +73,7 @@ public class serverConn {
             Connection connect = dbConnect.connectDatabase();
             
             Statement st = connect.createStatement();
-            ResultSet rec = st.executeQuery("SELECT username, password FROM adminTable WHERE username = '" + username + "'");
+            ResultSet rec = st.executeQuery("SELECT username, password FROM admintable WHERE username = '" + username + "'");
             
             while(rec.next()) {
                 String pw = rec.getString("password");
@@ -82,11 +82,11 @@ public class serverConn {
                     loginSuccess="true";
                 } else {
                     loginSuccess="false";
-                    JOptionPane.showMessageDialog(null, "Incorrect login details");
+                    
                 }
             }
         } catch(SQLException ioe) {
-            JOptionPane.showMessageDialog(null, "Connection to the database was unable to establish.");
+            
         }
         return loginSuccess;
     }
@@ -107,19 +107,19 @@ public class serverConn {
             Connection connect = dbConnect.connectDatabase();
             
             Statement st = connect.createStatement();
-            ResultSet rec = st.executeQuery("SELECT * FROM animals WHERE name LIKE %" + keyword + "%");
+            ResultSet rec = st.executeQuery("SELECT * FROM animaltable WHERE name LIKE %" + keyword + "%");
             
             while(rec.next()) {
-                int ID = rec.getInt("ID");
-                String name = rec.getString("name");
-                String description = rec.getString("description");
+                int ID = rec.getInt("animalID");
+                String name = rec.getString("animalName");
+                String description = rec.getString("animalDescription");
                 int specID = rec.getInt("speciesID");
                 
                 animal = new animal(ID, name, description, specID);
                 animalList.add(animal);
             }
         } catch (SQLException sqle) {
-            JOptionPane.showMessageDialog(null, "Error occured connecting to the database.");
+            
         }
         animal[] animals = (animal[]) animalList.toArray();
         return animals;
@@ -151,7 +151,7 @@ public class serverConn {
                 concat += String.valueOf(specID) + "-" + specName;
             }   
         } catch (SQLException ioe) {
-            JOptionPane.showMessageDialog(null, "Error occured searching species table");
+            
         }
         return concat;
     }
@@ -170,10 +170,10 @@ public class serverConn {
             Connection connection = dbConnection.connectDatabase();
             
             Statement dbStatement = connection.createStatement();
-            ResultSet rs = dbStatement.executeQuery("INSERT INTO animals (name, description, speciesID) VALUES ('" + name + "', '" + description + "', " + speciesID + ")");
+            ResultSet rs = dbStatement.executeQuery("INSERT INTO animaltable (name, description, speciesID) VALUES ('" + name + "', '" + description + "', " + speciesID + ")");
             bool = "true";
         } catch (SQLException sqle) {
-            JOptionPane.showMessageDialog(null, "Error inserting the animal details into the database.");
+            
         } 
         return bool;
     }
@@ -195,7 +195,7 @@ public class serverConn {
             ResultSet rs = dbStatement.executeQuery("INSERT INTO speciestable (speciesName) VALUES('" + species + "')");
             bool = "true";
         } catch (SQLException sqle) {
-            JOptionPane.showMessageDialog(null, "Error occured adding new species to the database via ServerConn.");
+            
         }
         return bool;
     }
@@ -218,7 +218,7 @@ public class serverConn {
             ResultSet rsr = dbStatement.executeQuery("DELETE FROM animals WHERE name = '" + name + "'");
             bool = "true";
         } catch (SQLException sqle) {
-            JOptionPane.showMessageDialog(null, "Error occured in ServerConn while executing delAnimal");
+            
         }
         return bool; 
     }
@@ -241,7 +241,7 @@ public class serverConn {
             ResultSet rs = dbStatement.executeQuery("DELETE FROM speciestable WHERE speciesID = '" + species + "'" );
             bool = "true";
         } catch (SQLException sqle) {
-            JOptionPane.showMessageDialog(null, "Error occured in ServerConn while executing delSpecies");
+            
         }
         return bool;
     }

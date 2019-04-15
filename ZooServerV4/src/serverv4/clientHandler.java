@@ -38,7 +38,10 @@ public class clientHandler extends Thread{
             ObjectOutputStream objout = new ObjectOutputStream(socket.getOutputStream());
             
             while(true) {
-                //vairable used to decide with method to use that the cse provides
+                /*vairable that is assigned the numerical call value from the 
+                 *client application, it is used in the switch case as it 
+                 *indicates which method the client needs the server to execute.
+                 */
                 String caseNum;
                 serverConn sC = new serverConn();
                 try {
@@ -71,7 +74,7 @@ public class clientHandler extends Thread{
                                 String returned4 = sC.addAnimal(animalName, animalDesc, specIDNum);
                                 output.println(returned4);
                             } catch (NumberFormatException nfe) {
-                                JOptionPane.showMessageDialog(null, "the number sent as speciesID during the add animal record sequence couldn't be parsed to int during client handling.");
+                                
                             }
                             break;
                         case "5":
@@ -95,21 +98,21 @@ public class clientHandler extends Thread{
                                 output.close();
                                 objout.close();
                             } catch (IOException ioe) {
-                                JOptionPane.showMessageDialog(null, "The error is occuring when the streams are closing at the end of the switch case staement in ClientHandler.");
+                                
                             }
                             break;
                         }
                 } catch (IOException ioe) {
-                    JOptionPane.showMessageDialog(null, "Error has occurec when reading info from the client to feed to the switch statement");
+                    
                 }
             }
         } catch (IOException ioe ) {
-            JOptionPane.showMessageDialog(null, "Running the thread caused the error");
+            
         } finally {
             try {
                 socket.close();
             } catch (IOException ioe) {
-                JOptionPane.showMessageDialog(null, "The finally statement after the catch block in the run method of the thread caused the error.");
+                
             }
         }
     }

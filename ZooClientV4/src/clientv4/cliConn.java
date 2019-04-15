@@ -37,7 +37,7 @@ public class cliConn {
             output = new PrintWriter(new BufferedOutputStream(cliSoc.getOutputStream()), true);
             objin = new ObjectInputStream(cliSoc.getInputStream());
         } catch (IOException ioe) {
-            JOptionPane.showMessageDialog(null, "The error is connecting to the server.");
+            JOptionPane.showMessageDialog(null, "Error occured establishing connection to the server");
         }
     }
     
@@ -54,7 +54,7 @@ public class cliConn {
         try {
             validation = input.readLine();
         } catch (IOException ioe) {
-            JOptionPane.showMessageDialog(null, "The error is on the validate Method");
+            JOptionPane.showMessageDialog(null, "Error occured receiving validation on admin credentials.");
         }
         return validation;
     }
@@ -63,12 +63,10 @@ public class cliConn {
      *server and provide it with key info to search for users choice of animal.
      */
     public animal[] searchAnimals(String animalKeyword) {
-        
         ArrayList<animal> animalList = new ArrayList();
         
         output.println("2");
         output.println(animalKeyword);
-        
         try {
             do{
             animal animal = (animal)objin.readObject();    
@@ -118,12 +116,11 @@ public class cliConn {
     public String addAnimal(String animalName, String description, String speciesID) {
         String success = "false";
         
-        output.println("4");
-        output.println(animalName);
-        output.println(description);
-        output.println(speciesID);
-        
         try {
+            output.println("4");
+            output.println(animalName);
+            output.println(description);
+            output.println(speciesID);
             success = input.readLine();
         } catch (IOException ioe) {
             JOptionPane.showMessageDialog(null, "Error occured executing add animal method in CliConn");
@@ -138,10 +135,9 @@ public class cliConn {
     public String addSpecies(String speciesName) {
         String success = "false";
         
-        output.println("5");
-        output.println(speciesName);
-        
         try {
+            output.println("5");
+            output.println(speciesName);
             success = input.readLine();
         } catch (IOException ioe)  {
             JOptionPane.showMessageDialog(null, "Error occured executing add species method in CliConn");
