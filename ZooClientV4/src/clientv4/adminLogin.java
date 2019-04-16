@@ -17,6 +17,7 @@ public class adminLogin extends javax.swing.JFrame {
     cliConn connection = new cliConn();
         
     public adminLogin() {
+        super("Admin Login Screen");
         initComponents();
         connection.connectTheServer();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -54,7 +55,7 @@ public class adminLogin extends javax.swing.JFrame {
         lblUsername.setForeground(new java.awt.Color(78, 197, 255));
         lblUsername.setText("Username:");
 
-        txtfUsername.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        txtfUsername.setFont(new java.awt.Font("Candara Light", 1, 18)); // NOI18N
         txtfUsername.setForeground(new java.awt.Color(78, 197, 255));
         txtfUsername.setBorder(null);
         txtfUsername.setCaretColor(new java.awt.Color(168, 136, 108));
@@ -66,7 +67,7 @@ public class adminLogin extends javax.swing.JFrame {
         lblPassword.setForeground(new java.awt.Color(78, 197, 255));
         lblPassword.setText("Password:");
 
-        txtfPassword.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        txtfPassword.setFont(new java.awt.Font("Candara Light", 1, 18)); // NOI18N
         txtfPassword.setForeground(new java.awt.Color(78, 197, 255));
         txtfPassword.setBorder(null);
         txtfPassword.setCaretColor(new java.awt.Color(168, 136, 108));

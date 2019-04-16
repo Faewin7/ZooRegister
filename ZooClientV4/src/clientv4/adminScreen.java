@@ -23,7 +23,9 @@ public class adminScreen extends javax.swing.JFrame {
     cliConn connection = new cliConn();
     
     public adminScreen() {
+        super("Administrator Screen");
         initComponents();
+        connection.connectTheServer();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
@@ -54,9 +56,7 @@ public class adminScreen extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         btnSpecAdd = new javax.swing.JButton();
         lblSpeciesName = new javax.swing.JLabel();
-        lblSpeciesID1 = new javax.swing.JLabel();
         txtfAddSpecName = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -192,13 +192,7 @@ public class adminScreen extends javax.swing.JFrame {
         lblSpeciesName.setForeground(new java.awt.Color(168, 136, 108));
         lblSpeciesName.setText("Species' Name:");
 
-        lblSpeciesID1.setFont(new java.awt.Font("Candara Light", 1, 18)); // NOI18N
-        lblSpeciesID1.setForeground(new java.awt.Color(168, 136, 108));
-        lblSpeciesID1.setText("Species' ID:");
-
         txtfAddSpecName.setFont(new java.awt.Font("Candara Light", 1, 14)); // NOI18N
-
-        jTextField5.setFont(new java.awt.Font("Candara Light", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -209,13 +203,9 @@ public class adminScreen extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator2)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSpeciesName)
-                            .addComponent(lblSpeciesID1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblSpeciesName)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtfAddSpecName, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
-                            .addComponent(jTextField5)))
+                        .addComponent(txtfAddSpecName, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnSpecAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -234,10 +224,6 @@ public class adminScreen extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSpeciesName)
                     .addComponent(txtfAddSpecName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSpeciesID1)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSpecAdd)
                 .addContainerGap())
@@ -479,8 +465,6 @@ public class adminScreen extends javax.swing.JFrame {
     *user.
     */
     private void btnAniDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAniDeleteActionPerformed
-        cliConn deleteAnimal = new cliConn();
-        deleteAnimal.connectTheServer();
         String animal  = txtfAniToDel.getText();
         String result;
         
@@ -489,7 +473,7 @@ public class adminScreen extends javax.swing.JFrame {
         } else {
             boolean matches = Pattern.matches("^[a-zA-Z]+\\s*[a-zA-Z]$", animal);
             if(matches) {
-               result = deleteAnimal.deleteAnimal(animal);
+               result = connection.deleteAnimal(animal);
                if (result.equals("true")) {
                    JOptionPane.showMessageDialog(null, "The animal relating to the name you searched has been deleted.");
                } else {
@@ -507,8 +491,6 @@ public class adminScreen extends javax.swing.JFrame {
     *user.
     */
     private void btnSpeciDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpeciDeleteActionPerformed
-        cliConn deleteSpecies = new cliConn();
-        deleteSpecies.connectTheServer();
         String species = txtfSpecToDel.getText();
         String result;
         
@@ -517,7 +499,7 @@ public class adminScreen extends javax.swing.JFrame {
         } else {
             boolean matches = Pattern.matches("[A-Z][a-z]+\\s[A-Z][a-z]+\\s*", species);
             if (matches) {
-                result = deleteSpecies.deleteSpecies(species);
+                result = connection.deleteSpecies(species);
                 if (result.equals("true")) {
                     JOptionPane.showMessageDialog(null, "The species you entered has been located and deleted.");
                 } else {
@@ -537,8 +519,6 @@ public class adminScreen extends javax.swing.JFrame {
     *user into the animal table in the database.
     */
     private void btnAniAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAniAddActionPerformed
-        cliConn addAnimal = new cliConn();
-        addAnimal.connectTheServer();
         String animalName = txtfAddAniName.getText();
         String animalDesc = txtfAddAniDesc.getText();
         String speciesID = txtfAddAniSpecID.getText();
@@ -548,10 +528,10 @@ public class adminScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please ensure all fields contain information regarding the animal you wish to add to the database.");
         } else {
             boolean matchesName = Pattern.matches("[A-Z][a-z]+\\s*", animalName);
-            boolean matchesDesc = Pattern.matches("[^0-9][a-zA-Z]+\\s*[^0-9][a-zA-Z]$", animalDesc);
-            boolean matchesSpecID = Pattern.matches("[0-9].{1,3}", speciesID);
+            boolean matchesDesc = Pattern.matches("\\w.*", animalDesc);
+            boolean matchesSpecID = Pattern.matches("[0-9]", speciesID);
             if (matchesName && matchesDesc && matchesSpecID) {
-                result = addAnimal.addAnimal(animalName, animalDesc, speciesID);
+                result = connection.addAnimal(animalName, animalDesc, speciesID);
                 if (result.equals("true")) {
                     JOptionPane.showMessageDialog(null, "Congrats, you have entered that animal into the database.");
                 } else {
@@ -571,18 +551,16 @@ public class adminScreen extends javax.swing.JFrame {
     *the species table in the database.
     */
     private void btnSpecAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpecAddActionPerformed
-        cliConn addSpecies = new cliConn();
-        addSpecies.connectTheServer();
         String speciesName = txtfAddSpecName.getText();
         String result;
         
         if(speciesName.equals("")) {
             JOptionPane.showMessageDialog(null, "Please enter the name of the species you wish to delete.");
         } else {
-            boolean matchesSpec = Pattern.matches("[A-Z][a-z]+\\s[A-Z][a-z]+\\s*", speciesName);
+            boolean matchesSpec = Pattern.matches("\\w.*", speciesName);
             if (matchesSpec) {
-                result = addSpecies.addSpecies(speciesName);
-                if (result.equals(true)) {
+                result = connection.addSpecies(speciesName);
+                if (result.equals("true")) {
                     JOptionPane.showMessageDialog(null, "Congrats, you added the species to the database.");
                 } else {
                     JOptionPane.showMessageDialog(null, "Unfortunately that species could not be added to the database due to backend failure.");
@@ -651,13 +629,11 @@ public class adminScreen extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JTabbedPane jTabbedPane4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JLabel lblAnimalDescription;
     private javax.swing.JLabel lblAnimalName;
     private javax.swing.JLabel lblDelAniName;
     private javax.swing.JLabel lblDelSpecName;
     private javax.swing.JLabel lblSpeciesID;
-    private javax.swing.JLabel lblSpeciesID1;
     private javax.swing.JLabel lblSpeciesName;
     private javax.swing.JTextField txtfAddAniDesc;
     private javax.swing.JTextField txtfAddAniName;

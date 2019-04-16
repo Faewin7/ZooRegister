@@ -15,6 +15,7 @@ public class startAndStop extends javax.swing.JFrame {
     serverConn openServer;
     /*Class constructor that when called intializes all componenets*/
     public startAndStop() {
+        super("Server initializer");
         initComponents();
     }
 

@@ -162,18 +162,23 @@ public class serverConn {
     *and false otherwise.
     */
     public String addAnimal(String name, String description, int speciesID) {
-        String bool = "false";
+        String bool = "";
         serverConn dbConnection;
         
         try {
             dbConnection = new serverConn();
             Connection connection = dbConnection.connectDatabase();
             
-            Statement dbStatement = connection.createStatement();
-            ResultSet rs = dbStatement.executeQuery("INSERT INTO animaltable (name, description, speciesID) VALUES ('" + name + "', '" + description + "', " + speciesID + ")");
+            String query = ("insert into animaltable (animalName, animalDescription, speciesID) values (?, ?, ?)");
+            PreparedStatement addAnimal = connection.prepareStatement(query);
+            addAnimal.setString(1, name);
+            addAnimal.setString(2, description);
+            addAnimal.setInt(3, speciesID);
+            addAnimal.execute();
+            connection.close();
             bool = "true";
         } catch (SQLException sqle) {
-            
+            bool = "false";
         } 
         return bool;
     }
@@ -184,18 +189,21 @@ public class serverConn {
     *and false otherwise.
     */
     public String addSpecies(String species) {
-        String bool = "false";
+        String bool;
         serverConn dbConnection;
         
         try {
             dbConnection = new serverConn();
             Connection connection = dbConnection.connectDatabase();
             
-            Statement dbStatement = connection.createStatement();
-            ResultSet rs = dbStatement.executeQuery("INSERT INTO speciestable (speciesName) VALUES('" + species + "')");
+            String query = "insert into speciestable (speciesName) values (?)";
+            PreparedStatement deleteSpecies = connection.prepareStatement(query);
+            deleteSpecies.setString(1, species);
+            deleteSpecies.execute();
+            connection.close();
             bool = "true";
         } catch (SQLException sqle) {
-            
+            bool = "false";
         }
         return bool;
     }
@@ -207,18 +215,21 @@ public class serverConn {
     *It will return a string variable stating false otherwise.
     */
     public String delAnimal(String name) {
-        String bool = "false";
+        String bool = "";
         serverConn dbConnection;
         
         try {
             dbConnection = new serverConn();
             Connection connection = dbConnection.connectDatabase();
             
-            Statement dbStatement = connection.createStatement();
-            ResultSet rsr = dbStatement.executeQuery("DELETE FROM animals WHERE name = '" + name + "'");
+            String query = "delete from animaltable where animalName = ?";
+            PreparedStatement deleteAnimal = connection.prepareStatement(query);
+            deleteAnimal.setString(1, name);
+            deleteAnimal.execute();
+            connection.close();
             bool = "true";
         } catch (SQLException sqle) {
-            
+            bool = "false";
         }
         return bool; 
     }
@@ -230,15 +241,18 @@ public class serverConn {
     *It will return a string variable stating false otherwise.
     */
     public String delSpecies(String species) {
-        String bool = "false";
+        String bool = "";
         serverConn dbConnection;
         
         try {
             dbConnection = new serverConn();
             Connection connection = dbConnection.connectDatabase();
             
-            Statement dbStatement = connection.createStatement();
-            ResultSet rs = dbStatement.executeQuery("DELETE FROM speciestable WHERE speciesID = '" + species + "'" );
+            String query = "delete from speciestable where speciesName = ?";
+            PreparedStatement deleteSpecies = connection.prepareStatement(query);
+            deleteSpecies.setString(1, species);
+            deleteSpecies.execute();
+            connection.close();
             bool = "true";
         } catch (SQLException sqle) {
             

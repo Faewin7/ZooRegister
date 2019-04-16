@@ -18,6 +18,7 @@ public class tutorial extends javax.swing.JFrame {
      * Creates new form Help
      */
     public tutorial() {
+        super("Tutorial");
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }

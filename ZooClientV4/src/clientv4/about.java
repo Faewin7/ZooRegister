@@ -17,6 +17,7 @@ public class about extends javax.swing.JFrame {
      * Creates new form About
      */
     public about() {
+        super("About");
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }

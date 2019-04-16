@@ -294,15 +294,9 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jSeparator2" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lblSpeciesName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblSpeciesID1" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="lblSpeciesName" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="txtfAddSpecName" pref="289" max="32767" attributes="0"/>
-                                          <Component id="jTextField5" max="32767" attributes="0"/>
-                                      </Group>
+                                      <Component id="txtfAddSpecName" pref="289" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -327,11 +321,6 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lblSpeciesName" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtfAddSpecName" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblSpeciesID1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextField5" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="btnSpecAdd" min="-2" max="-2" attributes="0"/>
@@ -387,25 +376,7 @@
                         <Property name="text" type="java.lang.String" value="Species&apos; Name:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="lblSpeciesID1">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Candara Light" size="18" style="1"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="6c" green="88" red="a8" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Species&apos; ID:"/>
-                      </Properties>
-                    </Component>
                     <Component class="javax.swing.JTextField" name="txtfAddSpecName">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Candara Light" size="14" style="1"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField5">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Candara Light" size="14" style="1"/>

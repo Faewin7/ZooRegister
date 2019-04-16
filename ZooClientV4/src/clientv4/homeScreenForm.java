@@ -37,6 +37,7 @@ public class homeScreenForm extends javax.swing.JFrame {
     cliConn connection = new cliConn();
     
     public homeScreenForm() {
+        super("Administrator Screen");
         initComponents();
         connection.connectTheServer();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -66,12 +67,8 @@ public class homeScreenForm extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnItemAdminLogin = new javax.swing.JMenuItem();
-        jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        mnItemSearchName = new javax.swing.JMenuItem();
-        mnItemSeachSpecies = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mnItemClose = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
         menuHelp = new javax.swing.JMenu();
         mnItemAbout = new javax.swing.JMenuItem();
         mnItem = new javax.swing.JMenuItem();
@@ -223,13 +220,6 @@ public class homeScreenForm extends javax.swing.JFrame {
             }
         });
         jMenu1.add(mnItemAdminLogin);
-        jMenu1.add(jSeparator2);
-
-        mnItemSearchName.setText("Search by Name");
-        jMenu1.add(mnItemSearchName);
-
-        mnItemSeachSpecies.setText("Search by Species");
-        jMenu1.add(mnItemSeachSpecies);
         jMenu1.add(jSeparator1);
 
         mnItemClose.setText("Close");
@@ -241,9 +231,6 @@ public class homeScreenForm extends javax.swing.JFrame {
         jMenu1.add(mnItemClose);
 
         jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
 
         menuHelp.setText("Help");
 
@@ -346,7 +333,6 @@ public class homeScreenForm extends javax.swing.JFrame {
      *corresponding method from CliConn. 
      */
     private void btnSrcSpeciesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSrcSpeciesActionPerformed
-        connection.connectTheServer();
         String speciesKeyword = txtfKeyword.getText();
         
         if (speciesKeyword.equals("")) {
@@ -357,6 +343,7 @@ public class homeScreenForm extends javax.swing.JFrame {
                 String[][] speciesData = connection.searchSpecies(speciesKeyword);
                 String columnNames[] = {"Species ID", "Species Name"};
                 tblAnimals = new JTable(speciesData, columnNames);
+                jScrollPane1.getViewport().add(tblAnimals);
             }
         }
     }//GEN-LAST:event_btnSrcSpeciesActionPerformed
@@ -367,7 +354,6 @@ public class homeScreenForm extends javax.swing.JFrame {
      *corresponding method from CliConn. 
      */
     private void btnSrcAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSrcAnimalActionPerformed
-        connection.connectTheServer();
         String animalKeyword = txtfKeyword.getText();
         animal[] animals;
         
@@ -386,6 +372,7 @@ public class homeScreenForm extends javax.swing.JFrame {
                     tableData[j][3] = animals[j].getSpeciesID();
                 }
                 tblAnimals = new JTable(tableData, columnTitles);
+                jScrollPane1.getViewport().add(tblAnimals);
             }
         }
     }//GEN-LAST:event_btnSrcAnimalActionPerformed
@@ -430,14 +417,12 @@ public class homeScreenForm extends javax.swing.JFrame {
     private javax.swing.JButton btnSrcAnimal;
     private javax.swing.JButton btnSrcSpecies;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JLabel lblTitle1;
     private javax.swing.JLabel lblTitle2;
@@ -447,8 +432,6 @@ public class homeScreenForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnItemAbout;
     private javax.swing.JMenuItem mnItemAdminLogin;
     private javax.swing.JMenuItem mnItemClose;
-    private javax.swing.JMenuItem mnItemSeachSpecies;
-    private javax.swing.JMenuItem mnItemSearchName;
     private javax.swing.JTable tblAnimals;
     public javax.swing.JTextField txtfKeyword;
     // End of variables declaration//GEN-END:variables
